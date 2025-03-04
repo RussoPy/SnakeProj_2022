@@ -25,6 +25,7 @@ namespace Snake
             //initialization of the game
             Snake1 = new List<Scale>();
             InitializeComponent();
+            this.KeyPreview = true;
             //Set settings to default
             new Settings();
             save_b.Enabled = false;
@@ -41,7 +42,33 @@ namespace Snake
             StartGame();
         }
 
-        
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Process arrow keys for snake movement, if the game is active
+            if (!Settings.Puase && !Settings.GameOver)
+            {
+                switch (keyData)
+                {
+                    case Keys.Right:
+                        if (Snake1[0].getDec() != 'l')
+                            Snake1[0].setDec('r');
+                        return true;
+                    case Keys.Left:
+                        if (Snake1[0].getDec() != 'r')
+                            Snake1[0].setDec('l');
+                        return true;
+                    case Keys.Up:
+                        if (Snake1[0].getDec() != 'd')
+                            Snake1[0].setDec('u');
+                        return true;
+                    case Keys.Down:
+                        if (Snake1[0].getDec() != 'u')
+                            Snake1[0].setDec('d');
+                        return true;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         private void StartGame()
         {
             //created objects for a new round of the game
@@ -434,6 +461,8 @@ namespace Snake
             resume_b.Enabled = false;
             restart_b.Enabled = false;
             StartGame();
+            this.BeginInvoke(new Action(() => pbCanvas.Focus()));
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -447,6 +476,11 @@ namespace Snake
         }
 
         private void save_b_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void resume_b_Click(object sender, EventArgs e)
         {
 
         }

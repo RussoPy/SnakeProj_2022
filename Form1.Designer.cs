@@ -116,6 +116,7 @@
             this.resume_b.TabIndex = 7;
             this.resume_b.Text = "Resume";
             this.resume_b.UseVisualStyleBackColor = true;
+            this.resume_b.Click += new System.EventHandler(this.resume_b_Click);
             this.resume_b.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Resume_Game);
             // 
             // restart_b
